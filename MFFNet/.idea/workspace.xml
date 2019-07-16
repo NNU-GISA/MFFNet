@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="011f78a4-f1b3-4563-93d3-3102d859965e" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sem_seg/train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-144">
+              <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/evaluate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_hdf5_data/room_filelist.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sem_seg/indoor3d_util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9576">
+              <caret line="532" selection-start-line="532" selection-end-line="532" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sem_seg/gen_point_freq_projection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6336">
+              <caret line="352" selection-start-line="352" selection-end-line="352" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1710">
+              <caret line="95" column="54" selection-start-line="95" selection-start-column="54" selection-end-line="95" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/data_prep_util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="972">
+              <caret line="55" column="49" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sample_data</find>
+      <find>exit()</find>
+      <find>generate_rgb_projection_data</find>
+      <find>rgb_projection_plus_normalized</find>
+      <find>generate_2rgb_opposite_projection</find>
+      <find>1.</find>
+      <find>&quot;3&quot;</find>
+      <find>point_freq_projection_plus_normalized</find>
+      <find>resolution</find>
+      <find>pixel_array</find>
+      <find>show3d_balls</find>
+      <find>ROOT_DIR</find>
+      <find>importlib</find>
+      <find>euler2mat</find>
+      <find>room2blocks_plus_normalized</find>
+      <find>room2blocks</find>
+      <find>load</find>
+      <find>get_variable</find>
+      <find>batch_norm_template_unused</find>
+      <find>sc</find>
+      <find>smpws</find>
+      <find>smpw</find>
+      <find>net</find>
+      <find>train_flag</find>
+      <find>full</find>
+      <find>fout_room</find>
+      <find>output_filename_prefix</find>
+      <find>save</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>(idx1, idx2)</replace>
+      <replace>0.7</replace>
+      <replace>x_dist**2+y_dist**2+z_dist**2</replace>
+      <replace>'1'</replace>
+      <replace>'2'</replace>
+      <replace>'3'</replace>
+      <replace>generate_point_freq_opposite_projection</replace>
+      <replace>array4pixel</replace>
+      <replace>self.train_flag</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/utils/show3d_balls.py" />
+        <option value="$PROJECT_DIR$/utils/eulerangles.py" />
+        <option value="$PROJECT_DIR$/utils/pc_util.py" />
+        <option value="$PROJECT_DIR$/utils/generate_pc_image.py" />
+        <option value="$PROJECT_DIR$/sem_seg/__init__.py" />
+        <option value="$PROJECT_DIR$/part_seg/test.py" />
+        <option value="$PROJECT_DIR$/part_seg/evaluate.py" />
+        <option value="$PROJECT_DIR$/sem_seg/gen_point_freq_projection.py" />
+        <option value="$PROJECT_DIR$/sem_seg/collect_indoor3d_data.py" />
+        <option value="$PROJECT_DIR$/utils/tf_util.py" />
+        <option value="$PROJECT_DIR$/models/vgg16.py" />
+        <option value="$PROJECT_DIR$/sem_seg/model.py" />
+        <option value="$PROJECT_DIR$/sem_seg/gen_rgb_projection.py" />
+        <option value="$PROJECT_DIR$/sem_seg/indoor3d_util.py" />
+        <option value="$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py" />
+        <option value="$PROJECT_DIR$/sem_seg/train.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="25" />
+    <option name="y" value="31" />
+    <option name="width" value="1851" />
+    <option name="height" value="1027" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="PointNet2_BACKUP_py3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PointNet2_BACKUP_py3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PointNet2_BACKUP_py3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PointNet2_BACKUP_py3" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PointNet2_BACKUP_py3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PointNet2_BACKUP_py3" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="indoor3d_sem_seg_hdf5_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PointNet2_BACKUP_py3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PointNet2_BACKUP_py3" type="462c0819:PsiDirectoryNode" />
+              <item name="part_seg" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.__init__">
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PointNet2_BACKUP_py3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gen_indoor3d_h5" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PointNet2_BACKUP_py3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sem_seg" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gen_point_freq_projection" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PointNet2_BACKUP_py3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sem_seg" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sem_seg/gen_point_freq_projection.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gen_rgb_projection" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PointNet2_BACKUP_py3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sem_seg" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sem_seg/gen_rgb_projection.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="generate_pc_image" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PointNet2_BACKUP_py3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/generate_pc_image.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.__init__" />
+        <item itemvalue="Python.gen_indoor3d_h5" />
+        <item itemvalue="Python.gen_point_freq_projection" />
+        <item itemvalue="Python.gen_rgb_projection" />
+        <item itemvalue="Python.generate_pc_image" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="011f78a4-f1b3-4563-93d3-3102d859965e" name="Default Changelist" comment="" />
+      <created>1556180469474</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556180469474</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="25" y="31" width="1851" height="1027" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4977221" visible="true" weight="0.16502193" />
+      <window_info id="Structure" order="1" sideWeight="0.5022779" side_tool="true" weight="0.12848867" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32785088" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2598684" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35526314" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32945284" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.23574561" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32894737" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>92</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py</url>
+          <line>98</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>440</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>416</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>307</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>308</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>311</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>312</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>418</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>377</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>428</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>201</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>203</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>206</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>207</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>209</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>210</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>211</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>314</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>315</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>318</line>
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>319</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>311</line>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>323</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>333</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>328</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py</url>
+          <line>532</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_point_freq_projection.py</url>
+          <line>336</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/part_seg/part_dataset.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="160" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>342</line>
+          <option name="timeStamp" value="161" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>343</line>
+          <option name="timeStamp" value="163" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>354</line>
+          <option name="timeStamp" value="169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>359</line>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>362</line>
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>363</line>
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>158</line>
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/gen_point_freq_projection.py</url>
+          <line>354</line>
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>366</line>
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>369</line>
+          <option name="timeStamp" value="185" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>153</line>
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sem_seg/indoor3d_util.py</url>
+          <line>357</line>
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>idx1&gt;=51</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>idx1&gt;=51</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>idx1==51</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>idx1==51</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>dim_x_dict[str(idx1)][str(idx2)]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>dim_x_dict[str(idx1)][str(idx2)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plane_data[idx, 1]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/models/pointnet2_part_seg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/collect_indoor3d_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/tf_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="329" column="8" selection-start-line="329" selection-start-column="4" selection-end-line="329" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/pointnet_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="121" column="65" selection-start-line="121" selection-start-column="65" selection-end-line="121" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_xz0.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_yz0.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_xy0.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf0_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf0_xz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf0_yz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf1_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf1_xz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf1_yz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf2_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf2_xz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf2_yz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf3_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf5_xz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/pf5_yz.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_xy1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_xz1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_xz2.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_yz1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_yz2.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb1_xy1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb1_xy2.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb1_xz1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb1_xz2.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb1_yz1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/rgb0_xy2.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/xy/pf0_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/xy/pf1_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/Area_1_conferenceRoom_1/xy/pf2_xy.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/xy/rgb0_xy1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/xy/rgb0_xy2.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/xy/rgb1_xy1.jpg" />
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_rgb_projection/Area_1_conferenceRoom_1/xy/rgb1_xy2.jpg" />
+    <entry file="file://$PROJECT_DIR$/models/vgg16.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1116">
+          <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
+          <folding>
+            <element signature="e#52#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/indoor3d_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/gen_rgb_projection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9576">
+          <caret line="532" selection-start-line="532" selection-end-line="532" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/gen_point_freq_projection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6336">
+          <caret line="352" selection-start-line="352" selection-end-line="352" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/gen_indoor3d_h5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="95" column="54" selection-start-line="95" selection-start-column="54" selection-end-line="95" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/data_prep_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="55" column="49" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/log/log_train.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log_res.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sem_seg/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_pf_projection/room_filelist.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15198" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/indoor3d_sem_seg_hdf5_data/room_filelist.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>
