@@ -11,11 +11,17 @@ import tf_util
 from pointnet_util import pointnet_sa_module, pointnet_fp_module
 
 
-vgg16_args_dict = {'num_output_channelsd': [64, 128, 256, 512, 512],
-                   'conv_size': [3, 3],
-                   'pool_size': [2, 2],
-                   'stride': [1, 1],
-                   'num_output_fc': [1024, 2048]}
+vgg16_args_dict = {'num_output_channels': [64, 128, 256, 512, 512],
+                   'conv_ksize': [3, 3],
+                   'pool_ksize': [2, 2],
+                   'stride': [[1, 1], [2, 2]],
+                   'num_output_fc': [4096, 256]}
+
+vgg8_args_dict = {'num_output_channels': [64, 128, 256, 512],
+                  'conv_ksize': [3, 3],
+                  'pool_ksize': [2, 2],
+                  'stride': [[1, 1], [2, 2]],
+                  'num_output_fc': [4096, 128]}
 
 
 def placeholder_inputs(batch_size, num_point, image_size, num_pf_views, num_rgb_views):
@@ -51,43 +57,60 @@ def get_model(point_cloud, projection_data, is_training, image_size,
         sliced_rgb_data = tf.reshape(sliced_rgb_data, (batch_size, image_size, image_size, 3))
         rgb_data.append(sliced_rgb_data)
 
+    # Use VGG16 as 2d-net
+    # vgg_args_dict = vgg16_args_dict
+
+    # Use VGG8 as 2d-net
+    vgg_args_dict = vgg8_args_dict
+
     # Set arguments
-    vgg16_args_dict['bn'] = True
-    vgg16_args_dict['bn_decay'] = bn_decay
-    vgg16_args_dict['image_size'] = image_size
-    vgg16_args_dict['train_flag'] = is_training
+    vgg_args_dict['bn'] = True
+    vgg_args_dict['bn_decay'] = bn_decay
+    vgg_args_dict['image_size'] = image_size
+    vgg_args_dict['train_flag'] = is_training
+    vgg_args_dict['batch_size'] = batch_size
 
     # MFFNet Structure
     with tf.variable_scope('mffnet') as scope:
-        with tf.variable_scope('2d_module') as scope_2d:
-            # VGG16 Module for Point Frequency Projection
-            with tf.variable_scope('pf_module') as scope_pf:
-                pf_net1 = vgg16.VGG16(pf_data[0], vgg16_args_dict, 'pf_net1').model()
-                pf_net2 = vgg16.VGG16(pf_data[1], vgg16_args_dict, 'pf_net2').model()
-                pf_net3 = vgg16.VGG16(pf_data[2], vgg16_args_dict, 'pf_net3').model()
+        # VGG16 Module for Point Frequency Projection
+        with tf.variable_scope('pf_module') as scope_pf:
+            pf_net1 = vgg16.VGG16(pf_data[0], vgg_args_dict, 'pf_net1').model()
+            pf_net2 = vgg16.VGG16(pf_data[1], vgg_args_dict, 'pf_net2').model()
+            pf_net3 = vgg16.VGG16(pf_data[2], vgg_args_dict, 'pf_net3').model()
 
-            # VGG16 Module for RGB Projection
-            with tf.variable_scope('rgb_module') as scope_rgb:
-                rgb_net1 = vgg16.VGG16(rgb_data[0], vgg16_args_dict, 'rgb_net1').model()
-                rgb_net2 = vgg16.VGG16(rgb_data[1], vgg16_args_dict, 'rgb_net2').model()
-                rgb_net3 = vgg16.VGG16(rgb_data[2], vgg16_args_dict, 'rgb_net3').model()
-                rgb_net4 = vgg16.VGG16(rgb_data[3], vgg16_args_dict, 'rgb_net4').model()
-                rgb_net5 = vgg16.VGG16(rgb_data[4], vgg16_args_dict, 'rgb_net5').model()
-                rgb_net6 = vgg16.VGG16(rgb_data[5], vgg16_args_dict, 'rgb_net6').model()
+            pf_module_fc_inputs = tf.concat(values=[pf_net1, pf_net2, pf_net3], axis=1, name='pf_fc_concat')
 
-            net2d_inputs = tf.concat(values=[pf_net1, pf_net2, pf_net3, rgb_net1, rgb_net2, rgb_net3, rgb_net4, rgb_net5, rgb_net6],
-                                     axis=1, name='net2d_concat')
-
-            # Full connection layers in 2d-net module
-            net2d_fc1 = tf_util.fully_connected(inputs=net2d_inputs, num_outputs=1024, use_xavier=True,
-                                                scope='net2d_fc1', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
-                                                bn_decay=bn_decay, is_training=is_training)
-            net2dfc_drop1 = tf_util.dropout(inputs=net2d_fc1, is_training=is_training, scope='net2dfc_dp1',
+            pf_net_fc1 = tf_util.fully_connected(inputs=pf_module_fc_inputs, num_outputs=2048, use_xavier=True,
+                                                 scope='pf_net_fc1', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
+                                                 bn_decay=bn_decay, is_training=is_training)
+            pf_fc_drop1 = tf_util.dropout(inputs=pf_net_fc1, is_training=is_training, scope='pf_net_fc_dp1',
                                             keep_prob=0.5, noise_shape=None)
 
-            net2d_fc2 = tf_util.fully_connected(inputs=net2dfc_drop1, num_outputs=128, use_xavier=True,
-                                                scope='net2d_fc2', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
-                                                bn_decay=bn_decay, is_training=is_training)
+            pf_net_fc2 = tf_util.fully_connected(inputs=pf_fc_drop1, num_outputs=128, use_xavier=True,
+                                                 scope='pf_net_fc2', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
+                                                 bn_decay=bn_decay, is_training=is_training)
+
+        # VGG16 Module for RGB Projection
+        with tf.variable_scope('rgb_module') as scope_rgb:
+            rgb_net1 = vgg16.VGG16(rgb_data[0], vgg_args_dict, 'rgb_net1').model()
+            rgb_net2 = vgg16.VGG16(rgb_data[1], vgg_args_dict, 'rgb_net2').model()
+            rgb_net3 = vgg16.VGG16(rgb_data[2], vgg_args_dict, 'rgb_net3').model()
+            rgb_net4 = vgg16.VGG16(rgb_data[3], vgg_args_dict, 'rgb_net4').model()
+            rgb_net5 = vgg16.VGG16(rgb_data[4], vgg_args_dict, 'rgb_net5').model()
+            rgb_net6 = vgg16.VGG16(rgb_data[5], vgg_args_dict, 'rgb_net6').model()
+
+            rgb_module_fc_inputs = tf.concat(values=[rgb_net1, rgb_net2, rgb_net3, rgb_net4, rgb_net5, rgb_net6],
+                                             axis=1, name='rgb_fc_concat')
+
+            rgb_net_fc1 = tf_util.fully_connected(inputs=rgb_module_fc_inputs, num_outputs=4096, use_xavier=True,
+                                                  scope='rgb_net_fc1', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
+                                                  bn_decay=bn_decay, is_training=is_training)
+            rgb_fc_drop1 = tf_util.dropout(inputs=rgb_net_fc1, is_training=is_training, scope='rgb_net_fc_dp1',
+                                           keep_prob=0.5, noise_shape=None)
+
+            rgb_net_fc2 = tf_util.fully_connected(inputs=rgb_fc_drop1, num_outputs=256, use_xavier=True,
+                                                  scope='rgb_net_fc2', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
+                                                  bn_decay=bn_decay, is_training=is_training)
 
         # PointNet++ Module
         with tf.variable_scope('pointnet2') as scope_pnet2:
@@ -150,15 +173,34 @@ def get_model(point_cloud, projection_data, is_training, image_size,
             # net = tf_util.dropout(net, keep_prob=0.5, is_training=is_training, scope='dp1')
             # net = tf_util.conv1d(net, 13, 1, padding='VALID', activation_fn=None, scope='fc2')
 
+        # MFFNet concatenating RGB and Point Frequency module features and full connection layers
+        net2d_inputs = tf.concat(
+            values=[pf_net_fc2, rgb_net_fc2],
+            axis=1, name='net2d_concat')
+
+        # Full connection layers in 2d-net module
+        net2d_fc1 = tf_util.fully_connected(inputs=net2d_inputs, num_outputs=2048, use_xavier=True,
+                                            scope='net2d_fc1', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
+                                            bn_decay=bn_decay, is_training=is_training)
+        net2dfc_drop1 = tf_util.dropout(inputs=net2d_fc1, is_training=is_training, scope='net2dfc_dp1',
+                                        keep_prob=0.5, noise_shape=None)
+
+        net2d_fc2 = tf_util.fully_connected(inputs=net2dfc_drop1, num_outputs=64, use_xavier=True,
+                                            scope='net2d_fc2', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
+                                            bn_decay=bn_decay, is_training=is_training)
+
+        # Expand the features
+        net2d_fc2 = tf.reshape(tensor=net2d_fc2, shape=(batch_size, 1, -1))
+        net2d_fc2 = tf.tile(input=net2d_fc2, multiples=[1, num_point, 1])
+
         # MFFNet full connection layer
-        mffnet_inputs = tf.concat(values=[pointnet2, net2d_fc2], axis=1, name='mffnet_concat')
-        mffnet_fc1 = tf_util.conv1d(mffnet_inputs, 256, 1, padding='VALID', bn=True, is_training=is_training, scope='mffnet_fc1',
-                                    bn_decay=bn_decay)
+        mffnet_inputs = tf.concat(values=[pointnet2, net2d_fc2], axis=2, name='mffnet_concat')
+        mffnet_fc1 = tf_util.conv1d(mffnet_inputs, 1024, 1, padding='VALID', bn=True, is_training=is_training,
+                                    scope='mffnet_fc1', bn_decay=bn_decay)
 
         mffnet_drop1 = tf_util.dropout(mffnet_fc1, keep_prob=0.5, is_training=is_training, scope='mffnet_dp1')
-        mffnet = tf_util.fully_connected(inputs=mffnet_drop1, num_outputs=num_class, use_xavier=True,
-                                         scope='mffnet_fc2', stddev=1e-3, activation_fn=tf.nn.relu, bn=True,
-                                         bn_decay=bn_decay, is_training=is_training)
+        mffnet = tf_util.conv1d(mffnet_drop1, num_class, 1, padding='VALID', bn=True, is_training=is_training,
+                                scope='mffnet_fc2', bn_decay=bn_decay)
 
         return mffnet
 

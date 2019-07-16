@@ -23,8 +23,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=2, help='GPU to use [default: GPU 2]')
 parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')
 parser.add_argument('--num_point', type=int, default=4096, help='Point number [default: 4096]')
-parser.add_argument('--max_epoch', type=int, default=50, help='Epoch to run [default: 50]')
-parser.add_argument('--batch_size', type=int, default=24, help='Batch Size during training [default: 24]')
+parser.add_argument('--max_epoch', type=int, default=121, help='Epoch to run [default: 121]')
+parser.add_argument('--batch_size', type=int, default=8, help='Batch Size during training [default: 16]')
 parser.add_argument('--learning_rate', type=float, default=0.001, help='Initial learning rate [default: 0.001]')
 parser.add_argument('--momentum', type=float, default=0.9, help='Initial learning rate [default: 0.9]')
 parser.add_argument('--optimizer', default='adam', help='adam or momentum [default: adam]')
@@ -89,8 +89,8 @@ for h5_filename in ALL_FILES:
     label_batch_list.append(label_batch)
 data_batches = np.concatenate(data_batch_list, 0)
 label_batches = np.concatenate(label_batch_list, 0)
-print((data_batches.shape))
-print((label_batches.shape))
+print('Data Batches Shape: {}'.format(data_batches.shape))
+print('Label Batches Shape: {}'.format(label_batches.shape))
 
 
 def load_rgb_pf_data(path, type_of_projection=True):
@@ -108,13 +108,23 @@ def load_rgb_pf_data(path, type_of_projection=True):
         room_name = block_name[block_name.find('_') + 1:]
         block_num = block_name.split('_')[0]
         block_data_dict = {}
-        for dir in os.listdir(os.path.join(RGB_DATA_PATH, room_name)):
+        for dir in os.listdir(os.path.join(path, room_name)):
 
             # Obtain different data of RGB or Point Frequency
             if type_of_projection is True:
-                block_data_path = os.path.join(RGB_DATA_PATH, room_name, dir, 'rgb{}_{}.npy'.format(block_num, dir))
+                block_data_path = os.path.join(path, room_name, dir, 'rgb{}_{}.npy'.format(block_num, dir))
+                if not os.path.exists(block_data_path):
+                    for idx in range(1, 121):
+                        block_data_path = os.path.join(path, room_name, dir, 'rgb{}_{}.npy'.format(str(int(block_num)+idx), dir))
+                        if os.path.exists(block_data_path):
+                            break
             else:
-                block_data_path = os.path.join(RGB_DATA_PATH, room_name, dir, 'pf{}_{}.npy'.format(block_num, dir))
+                block_data_path = os.path.join(path, room_name, dir, 'pf{}_{}.npy'.format(block_num, dir))
+                if not os.path.exists(block_data_path):
+                    for idx in range(1, 121):
+                        block_data_path = os.path.join(path, room_name, dir, 'pf{}_{}.npy'.format(str(int(block_num)+idx), dir))
+                        if os.path.exists(block_data_path):
+                            break
 
             block_data = np.load(block_data_path)/255.0
             block_data = np.expand_dims(block_data, 0)
@@ -134,6 +144,7 @@ def load_rgb_pf_data(path, type_of_projection=True):
 rgb_data_batches_list = load_rgb_pf_data(path=RGB_DATA_PATH, type_of_projection=True)
 pf_data_batches_list = load_rgb_pf_data(path=PF_DATA_PATH, type_of_projection=False)
 
+# Split the data into train data and test data
 test_area = 'Area_'+str(FLAGS.test_area)
 train_idxs = []
 test_idxs = []
@@ -169,8 +180,8 @@ for pf_data_batches in pf_data_batches_list:
 
 test_label = label_batches[test_idxs]
 
-print((train_data.shape, train_label.shape))
-print((test_data.shape, test_label.shape))
+print('Point Cloud -> Train Data Shape: {}, Train Label Shape: {}'.format(train_data.shape, train_label.shape))
+print('Point Cloud -> Test Data Shape: {}, Test Label Shape: {}'.format(test_data.shape, test_label.shape))
 
 
 def log_string(out_str):
@@ -298,7 +309,7 @@ def train_one_epoch(sess, ops, train_writer):
     rgb_current_data = np.concatenate(rgb_current_data, 0)
     pf_current_data = np.concatenate(pf_current_data, 0)
     pf_current_data = np.reshape(pf_current_data,
-                                 (pf_current_data.shape[0]. pf_curent_data.shape[1], IMAGE_SIZE, IMAGE_SIZE, 1))
+                                 (pf_current_data.shape[0], pf_current_data.shape[1], IMAGE_SIZE, IMAGE_SIZE, 1))
 
     file_size = pc_current_data.shape[0]
     num_batches = file_size // BATCH_SIZE

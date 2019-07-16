@@ -37,6 +37,7 @@ class VGG16:
         self.image_size = args_dict['image_size']
         self.num_output_fc = args_dict['num_output_fc']
         self.train_flag = args_dict['train_flag']
+        self.batch_size = args_dict['batch_size']
 
     def model(self):
         """Function that is used to train the VGG16 network
@@ -49,73 +50,73 @@ class VGG16:
         with tf.variable_scope(self.scope) as scope:
             # 1st convlution layer
             self.conv1_1 = tf_util.conv2d(inputs=self.train_data, num_output_channels=self.num_output_channels[0],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv1_1',)
             # 2nd convlution layer
             self.conv1_2 = tf_util.conv2d(inputs=self.conv1_1, num_output_channels=self.num_output_channels[0],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv1_2')
             self.pool1 = tf_util.max_pool2d(inputs=self.conv1_2, kernel_size=self.pool_ksize, padding='SAME',
-                                            stride=self.stride, scope='pool1')
+                                            stride=self.stride[1], scope='pool1')
 
             # 3rd convlution layer
             self.conv2_1 = tf_util.conv2d(inputs=self.pool1, num_output_channels=self.num_output_channels[1],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv2_1')
             # 4th convlution layer
             self.conv2_2 = tf_util.conv2d(inputs=self.conv2_1, num_output_channels=self.num_output_channels[1],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv2_2')
             self.pool2 = tf_util.max_pool2d(inputs=self.conv2_2, kernel_size=self.pool_ksize, padding='SAME',
-                                            stride=self.stride, scope='pool2')
+                                            stride=self.stride[1], scope='pool2')
 
             # 5th convlution layer
             self.conv3_1 = tf_util.conv2d(inputs=self.pool2, num_output_channels=self.num_output_channels[2],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv3_1')
             # 6th convlution layer
             self.conv3_2 = tf_util.conv2d(inputs=self.conv3_1, num_output_channels=self.num_output_channels[2],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv3_2')
             # 7th convlution layer
             self.conv3_3 = tf_util.conv2d(inputs=self.conv3_2, num_output_channels=self.num_output_channels[2],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv3_3', )
             self.pool3 = tf_util.max_pool2d(inputs=self.conv3_3, kernel_size=self.pool_ksize, padding='SAME',
-                                            stride=self.stride, scope='pool3')
+                                            stride=self.stride[1], scope='pool3')
 
             # 8th convlution layer
             self.conv4_1 = tf_util.conv2d(inputs=self.pool3, num_output_channels=self.num_output_channels[3],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv4_1')
             # 9th convlution layer
             self.conv4_2 = tf_util.conv2d(inputs=self.conv4_1, num_output_channels=self.num_output_channels[3],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv4_2')
             # 10th convlution layer
             self.conv4_3 = tf_util.conv2d(inputs=self.conv4_2, num_output_channels=self.num_output_channels[3],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv4_3')
             self.pool4 = tf_util.max_pool2d(inputs=self.conv4_3, kernel_size=self.pool_ksize, padding='SAME',
-                                            stride=self.stride, scope='pool4')
+                                            stride=self.stride[1], scope='pool4')
 
             # 11th convlution layer
             self.conv5_1 = tf_util.conv2d(inputs=self.pool4, num_output_channels=self.num_output_channels[4],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv5_1')
             # 12th convlution layerb
             self.conv5_2 = tf_util.conv2d(inputs=self.conv5_1, num_output_channels=self.num_output_channels[4],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv5_2')
             # 13th convlution layer
-            self.conv5_3 = tf_util.conv2d(inputs=self.conv5_3, num_output_channels=self.num_output_channels[4],
-                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride,
+            self.conv5_3 = tf_util.conv2d(inputs=self.conv5_2, num_output_channels=self.num_output_channels[4],
+                                          kernel_size=self.conv_ksize, padding='SAME', stride=self.stride[0],
                                           bn=self.bn, bn_decay=self.bn_decay, is_training=self.train_flag, scope='conv5_3')
             self.pool5 = tf_util.max_pool2d(inputs=self.conv5_3, kernel_size=self.pool_ksize, padding='SAME',
-                                            stride=self.stride, scope='pool5')
+                                            stride=self.stride[1], scope='pool5')
 
             # 14th affine layer / fully-connected layer
-            x_flattened = tf.reshape(self.pool5, [-1, (self.image_size/32)*self.num_output_channels[4]])
+            x_flattened = tf.reshape(self.pool5, [-1, int((self.image_size/32)*self.num_output_channels[4])])
             self.fc6 = tf_util.fully_connected(inputs=x_flattened, num_outputs=self.num_output_fc[0], use_xavier=True, scope='fc6',
                                                stddev=1e-3, activation_fn=tf.nn.relu, bn=self.bn, bn_decay=self.bn_decay,
                                                is_training=self.train_flag)

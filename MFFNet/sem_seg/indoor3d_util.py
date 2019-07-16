@@ -151,8 +151,6 @@ def generate_rgb_projection_data(data, filename, index):
         #             img=rgb_result_yz[idx, :, :, ::-1])
         np.save(os.path.join(result_dir_yz[idx], 'rgb{}_yz{}.npy'.format(index, idx+1)), rgb_result_yz[idx, :, :, ::-1])
 
-    print('RGB Projection: ' + filename + ' ' + '-> Finish Block#{}'.format(index))
-
 
 def generate_pf_projection_data(data, filename, index):
     # Generate the point frequency projection data
@@ -180,8 +178,6 @@ def generate_pf_projection_data(data, filename, index):
 
     # cv2.imwrite(filename=os.path.join(result_dir_yz, 'pf{}_yz.jpg'.format(index)), img=pf_result_yz)
     np.save(os.path.join(result_dir_yz, 'pf{}_yz.npy'.format(index)), pf_result_yz)
-
-    print('Point Frequency Projection: ' + filename + ' ' + '-> Finish Block#{}'.format(index))
 
 
 def collect_point_label(anno_path, out_filename, file_format='txt'):
@@ -342,7 +338,10 @@ def room2blocks(data, label, num_point, block_size=1.0, stride=1.0,
     # Collect blocks
     block_data_list = []
     block_label_list = []
-    idx = 0
+
+    # Calculate the interval between two blocks
+    interval_count = 0
+
     for idx in range(len(xbeg_list)): 
         xbeg = xbeg_list[idx]
         ybeg = ybeg_list[idx]
@@ -358,23 +357,29 @@ def room2blocks(data, label, num_point, block_size=1.0, stride=1.0,
         cond = cond & zcond
 
         if np.sum(cond) < 1200: # discard block if there are less than 1200 pts.
-           continue
+            interval_count += 1
+            continue
 
         block_data = data[cond, :]
         block_label = label[cond]
 
         # Generate point frequency projection
-        generate_pf_projection_data(data=block_data, filename=filename, index=idx)
+        generate_pf_projection_data(data=block_data, filename=filename, index=idx-interval_count)
 
         # Generate RGB projeciton
-        generate_rgb_projection_data(data=block_data, filename=filename, index=idx)
+        generate_rgb_projection_data(data=block_data, filename=filename, index=idx-interval_count)
 
         # randomly subsample dataf
         block_data_sampled, block_label_sampled = \
             sample_data_label(block_data, block_label, num_point)
         block_data_list.append(np.expand_dims(block_data_sampled, 0))
         block_label_list.append(np.expand_dims(block_label_sampled, 0))
-            
+
+    print(filename +
+          ' -> RGB & PF Projection: total blocks: {}, intervals: {}, actual blocks: {}'.format(len(xbeg_list),
+                                                                                               interval_count,
+                                                                                               len(xbeg_list)-interval_count))
+
     return np.concatenate(block_data_list, 0), \
            np.concatenate(block_label_list, 0)
 
