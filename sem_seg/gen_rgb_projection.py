@@ -64,12 +64,15 @@ def quicksort(array, low, high):
         quicksort(array=array, low=pivot_index+1, high=high)
 
 
-def normalize_xyz(xyz_data):
-    """Function that is used to normalize the xyz data
+def normalize_xyz_warping(xyz_data):
+    """Function that is used to normalize the xyz data, which is warped
 
     :param xyz_data:
     :return:
     """
+
+    if np.min(xyz_data) < 0:
+        xyz_data -= np.min(xyz_data)
 
     if np.max(xyz_data) != 0:
         xyz_data /= np.max(xyz_data)
@@ -78,8 +81,28 @@ def normalize_xyz(xyz_data):
     return xyz_data
 
 
-def rgb_projection_plus_normalized(data_source, resolution, radius=0.5,
-                                   kernel_size=3, sample_num=10, block_size=3):
+def normalize_xyz(xyz_data, area_size=1.0):
+    """Function that is used to normalize the xyz data
+
+    :param xyz_data:
+    :param area_size:
+    :return:
+    """
+
+    # Size of the given block of the point cloud should be larger than zero
+    assert(area_size > 0)
+
+    if np.min(xyz_data) < 0:
+        xyz_data -= np.min(xyz_data)
+
+    xyz_data /= area_size
+    xyz_data -= np.min(xyz_data)
+
+    return xyz_data
+
+
+def rgb_projection_plus_warped_normalized(data_source, resolution, radius=0.5,
+                                          kernel_size=3, sample_num=10, block_size=3):
     """Function that projects the data to different planes
 
     :param data_source: np.ndarray, an object that stores original data
@@ -95,9 +118,48 @@ def rgb_projection_plus_normalized(data_source, resolution, radius=0.5,
     # Normalization
     data = data_source[:, 0:6]
 
-    data[:, 0], data[:, 1], data[:, 2] = normalize_xyz(xyz_data=data[:, 0]), \
-                                         normalize_xyz(xyz_data=data[:, 1]), \
-                                         normalize_xyz(xyz_data=data[:, 2])
+    data[:, 0], data[:, 1], data[:, 2] = normalize_xyz_warping(xyz_data=data[:, 0]), \
+                                         normalize_xyz_warping(xyz_data=data[:, 1]), \
+                                         normalize_xyz_warping(xyz_data=data[:, 2])
+
+    # Generates RGB data in different projection
+    rgb_result_xy = generate_rgb_projection_data(data=data,
+                                                 resolution=resolution, plane_name='xy',
+                                                 sample_num=sample_num, block_size=block_size,
+                                                 kernel_size=kernel_size, radius=radius)
+    rgb_result_xz = generate_rgb_projection_data(data=data,
+                                                 resolution=resolution, plane_name='xz',
+                                                 sample_num=sample_num, block_size=block_size,
+                                                 kernel_size=kernel_size, radius=radius)
+    rgb_result_yz = generate_rgb_projection_data(data=data,
+                                                 resolution=resolution, plane_name='yz',
+                                                 sample_num=sample_num, block_size=block_size,
+                                                 kernel_size=kernel_size, radius=radius)
+
+    return rgb_result_xy.astype(np.uint8), rgb_result_xz.astype(np.uint8), rgb_result_yz.astype(np.uint8)
+
+
+def rgb_projection_plus_normalized(data_source, resolution, radius=0.5,
+                                   kernel_size=3, sample_num=10, block_size=3, area_size=1.0):
+    """Function that projects the data to different planes
+
+    :param data_source: np.ndarray, an object that stores original data
+    :param resolution: int, an object that represents the resolution of the RGB image
+    :param sample_num: int, an object that represents the number of points in our consideration
+    :param block_size: int, an object that represents the size of the block
+    :param radius: int, an object that represents the bias for the coordinates to deal with the transformation
+    :param kernel_size: int, an object that represents the size of the kernel used in filtering
+    :param area_size: float, an object that represents the boundary of the given point cloud block
+    :return:
+    """
+
+    # Scale all points to the range (0,1)
+    # Normalization
+    data = data_source[:, 0:6]
+
+    data[:, 0], data[:, 1], data[:, 2] = normalize_xyz(xyz_data=data[:, 0], area_size=area_size), \
+                                         normalize_xyz(xyz_data=data[:, 1], area_size=area_size), \
+                                         normalize_xyz(xyz_data=data[:, 2], area_size=area_size)
 
     # Generates RGB data in different projection
     rgb_result_xy = generate_rgb_projection_data(data=data,
@@ -510,12 +572,10 @@ def main():
     data_list = os.listdir(config.data_dir)
     for data_file in data_list:
         data_source = load_data_files(config.data_dir+'/'+data_file)
-        rgb_result_xy, rgb_result_xz, rgb_result_yz = rgb_projection_plus_normalized(data_source=data_source,
-                                                                                     resolution=config.resolution,
-                                                                                     sample_num=config.sample_num,
-                                                                                     block_size=config.block_size,
-                                                                                     kernel_size=config.kernel_size,
-                                                                                     radius=config.radius)
+        rgb_result_xy, rgb_result_xz, rgb_result_yz = \
+            rgb_projection_plus_warped_normalized(data_source=data_source, resolution=config.resolution,
+                                                  sample_num=config.sample_num, block_size=config.block_size,
+                                                  kernel_size=config.kernel_size, radius=config.radius)
 
         result_file_name = str(config.res_dir+'/'+data_file[:-4])+'_'
         # Generate the RGB matrix

@@ -51,6 +51,12 @@ config4rgb_projection = {'resolution': 32,
                          'kernel_size': 3,
                          'radius': 0.5}
 
+# ATTENTION:
+#           The global variable below is used to determine whether the normalization in projection generation will
+#           use warping operation. If it is true, the normalization may warp projection images.
+#           Otherwise, the proportion of different elements in projection images will keep fixed in normalization.
+FLAG4WARPING = True
+
 # -----------------------------------------------------------------------------
 # CONVERT ORIGINAL DATA TO OUR DATA_LABEL FILES
 # -----------------------------------------------------------------------------
@@ -112,19 +118,17 @@ def mkdir4rgb_projection(filename):
         os.makedirs(result_dir_yz2)
 
 
-def generate_rgb_projection_data(data, filename, index):
+def generate_warped_rgb_projection_data(data, filename, index):
     # Generate the RGB projection data
     data[:,3:6] = data[:,3:6]*255.0
-    rgb_result_xy, rgb_result_xz, rgb_result_yz = rgb_projection_plus_normalized(data_source=data,
-                                                                                 resolution=config4rgb_projection[
-                                                                                     'resolution'],
-                                                                                 sample_num=config4rgb_projection[
-                                                                                     'sample_num'],
-                                                                                 block_size=config4rgb_projection[
-                                                                                     'block_size'],
-                                                                                 kernel_size=config4rgb_projection[
-                                                                                     'kernel_size'],
-                                                                                 radius=config4rgb_projection['radius'])
+
+    # Normalization with warping operation
+    rgb_result_xy, rgb_result_xz, rgb_result_yz = \
+        rgb_projection_plus_warped_normalized(data_source=data, resolution=config4rgb_projection['resolution'],
+                                              sample_num=config4rgb_projection['sample_num'],
+                                              block_size=config4rgb_projection['block_size'],
+                                              kernel_size=config4rgb_projection['kernel_size'],
+                                              radius=config4rgb_projection['radius'])
 
     # Create a new directory if it does not exist
     result_dir = os.path.join(RGB_DATA_PATH, filename)
@@ -152,15 +156,77 @@ def generate_rgb_projection_data(data, filename, index):
         np.save(os.path.join(result_dir_yz[idx], 'rgb{}_yz{}.npy'.format(index, idx+1)), rgb_result_yz[idx, :, :, ::-1])
 
 
-def generate_pf_projection_data(data, filename, index):
+def generate_warped_pf_projection_data(data, filename, index):
     # Generate the point frequency projection data
-    pf_result_xy, pf_result_yz, pf_result_xz = point_freq_projection_plus_normalized(data_source=data,
-                                                                                     resolution=config4pf_projection[
-                                                                                         'resolution'],
-                                                                                     block_size=config4pf_projection[
-                                                                                         'block_size'],
-                                                                                     other_op=config4pf_projection[
-                                                                                         'other_operation'])
+    # Normalization with warping operation
+    pf_result_xy, pf_result_yz, pf_result_xz = \
+        point_freq_projection_plus_warped_normalized(data_source=data, resolution=config4pf_projection['resolution'],
+                                                     block_size=config4pf_projection['block_size'],
+                                                     other_op=config4pf_projection['other_operation'])
+
+    # Create a new directory if it does not exist
+    result_dir = os.path.join(PF_DATA_PATH, filename)
+    # Create sub-directories for storage
+    result_dir_xy = os.path.join(result_dir, 'xy')
+    result_dir_xz = os.path.join(result_dir, 'xz')
+    result_dir_yz = os.path.join(result_dir, 'yz')
+
+    # Generate the point frequency matrix
+    # cv2.imwrite(filename=os.path.join(result_dir_xy, 'pf{}_xy.jpg'.format(index)), img=pf_result_xy)
+    np.save(os.path.join(result_dir_xy, 'pf{}_xy.npy'.format(index)), pf_result_xy)
+
+    # cv2.imwrite(filename=os.path.join(result_dir_xz, 'pf{}_xz.jpg'.format(index)), img=pf_result_xz)
+    np.save(os.path.join(result_dir_xz, 'pf{}_xz.npy'.format(index)), pf_result_xz)
+
+    # cv2.imwrite(filename=os.path.join(result_dir_yz, 'pf{}_yz.jpg'.format(index)), img=pf_result_yz)
+    np.save(os.path.join(result_dir_yz, 'pf{}_yz.npy'.format(index)), pf_result_yz)
+
+
+def generate_rgb_projection_data(data, filename, index, area_size=1.0):
+    # Generate the RGB projection data
+    data[:,3:6] = data[:,3:6]*255.0
+
+    # Normalization with warping operation
+    rgb_result_xy, rgb_result_xz, rgb_result_yz = \
+        rgb_projection_plus_normalized(data_source=data, resolution=config4rgb_projection['resolution'],
+                                       sample_num=config4rgb_projection['sample_num'],
+                                       block_size=config4rgb_projection['block_size'],
+                                       kernel_size=config4rgb_projection['kernel_size'],
+                                       radius=config4rgb_projection['radius'], area_size=area_size)
+
+    # Create a new directory if it does not exist
+    result_dir = os.path.join(RGB_DATA_PATH, filename)
+
+    # Create sub-directories for storage
+    result_dir_xy = [os.path.join(result_dir, 'xy1'), os.path.join(result_dir, 'xy2')]
+    result_dir_xz = [os.path.join(result_dir, 'xz1'), os.path.join(result_dir, 'xz2')]
+    result_dir_yz = [os.path.join(result_dir, 'yz1'), os.path.join(result_dir, 'yz2')]
+
+    # Generate the RGB matrix
+    for idx in range(2):
+        # Save xy plane
+        # cv2.imwrite(filename=os.path.join(result_dir_xy, 'rgb{}_xy{}.jpg'.format(index, idx+1)),
+        #             img=rgb_result_xy[idx, :, :, ::-1])
+        np.save(os.path.join(result_dir_xy[idx], 'rgb{}_xy{}.npy'.format(index, idx+1)), rgb_result_xy[idx, :, :, ::-1])
+
+        # Save xz plane
+        # cv2.imwrite(filename=os.path.join(result_dir_xz, 'rgb{}_xz{}.jpg'.format(index, idx+1)),
+        #             img=rgb_result_xz[idx, :, :, ::-1])
+        np.save(os.path.join(result_dir_xz[idx], 'rgb{}_xz{}.npy'.format(index, idx+1)), rgb_result_xz[idx, :, :, ::-1])
+
+        # Save yz plane
+        # cv2.imwrite(filename=os.path.join(result_dir_yz, 'rgb{}_yz{}.jpg'.format(index, idx+1)),
+        #             img=rgb_result_yz[idx, :, :, ::-1])
+        np.save(os.path.join(result_dir_yz[idx], 'rgb{}_yz{}.npy'.format(index, idx+1)), rgb_result_yz[idx, :, :, ::-1])
+
+
+def generate_pf_projection_data(data, filename, index, area_size=1.0):
+    # Generate the point frequency projection data
+    # Normalization with warping operation
+    pf_result_xy, pf_result_yz, pf_result_xz = \
+        point_freq_projection_plus_normalized(data_source=data, resolution=config4pf_projection['resolution'],
+                                              block_size=config4pf_projection['block_size'],
+                                              other_op=config4pf_projection['other_operation'], area_size=area_size)
 
     # Create a new directory if it does not exist
     result_dir = os.path.join(PF_DATA_PATH, filename)
@@ -363,11 +429,21 @@ def room2blocks(data, label, num_point, block_size=1.0, stride=1.0,
         block_data = data[cond, :]
         block_label = label[cond]
 
-        # Generate point frequency projection
-        generate_pf_projection_data(data=block_data, filename=filename, index=idx-interval_count)
+        # Warped or not
+        if FLAG4WARPING is True:
+            # Generate point frequency projection
+            generate_warped_pf_projection_data(data=block_data, filename=filename, index=idx-interval_count)
 
-        # Generate RGB projeciton
-        generate_rgb_projection_data(data=block_data, filename=filename, index=idx-interval_count)
+            # Generate RGB projeciton
+            generate_warped_rgb_projection_data(data=block_data, filename=filename, index=idx-interval_count)
+        else:
+            # Generate point frequency projection
+            generate_pf_projection_data(data=block_data, filename=filename,
+                                        index=idx-interval_count, area_size=block_size)
+
+            # Generate RGB projeciton
+            generate_rgb_projection_data(data=block_data, filename=filename,
+                                         index=idx-interval_count, area_size=block_size)
 
         # randomly subsample dataf
         block_data_sampled, block_label_sampled = \

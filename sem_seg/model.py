@@ -6,7 +6,8 @@ sys.path.append(os.path.join(BASE_DIR, '../utils'))
 sys.path.append(os.path.join(BASE_DIR, '../models'))
 import tensorflow as tf
 import numpy as np
-from models import vgg16
+import vgg16
+import vgg8
 import tf_util
 from pointnet_util import pointnet_sa_module, pointnet_fp_module
 
@@ -74,9 +75,15 @@ def get_model(point_cloud, projection_data, is_training, image_size,
     with tf.variable_scope('mffnet') as scope:
         # VGG16 Module for Point Frequency Projection
         with tf.variable_scope('pf_module') as scope_pf:
-            pf_net1 = vgg16.VGG16(pf_data[0], vgg_args_dict, 'pf_net1').model()
-            pf_net2 = vgg16.VGG16(pf_data[1], vgg_args_dict, 'pf_net2').model()
-            pf_net3 = vgg16.VGG16(pf_data[2], vgg_args_dict, 'pf_net3').model()
+            # VGG16
+            # pf_net1 = vgg16.VGG16(pf_data[0], vgg_args_dict, 'pf_net1').model()
+            # pf_net2 = vgg16.VGG16(pf_data[1], vgg_args_dict, 'pf_net2').model()
+            # pf_net3 = vgg16.VGG16(pf_data[2], vgg_args_dict, 'pf_net3').model()
+
+            # VGG8
+            pf_net1 = vgg8.VGG8(pf_data[0], vgg_args_dict, 'pf_net1').model()
+            pf_net2 = vgg8.VGG8(pf_data[1], vgg_args_dict, 'pf_net2').model()
+            pf_net3 = vgg8.VGG8(pf_data[2], vgg_args_dict, 'pf_net3').model()
 
             pf_module_fc_inputs = tf.concat(values=[pf_net1, pf_net2, pf_net3], axis=1, name='pf_fc_concat')
 
@@ -92,12 +99,21 @@ def get_model(point_cloud, projection_data, is_training, image_size,
 
         # VGG16 Module for RGB Projection
         with tf.variable_scope('rgb_module') as scope_rgb:
-            rgb_net1 = vgg16.VGG16(rgb_data[0], vgg_args_dict, 'rgb_net1').model()
-            rgb_net2 = vgg16.VGG16(rgb_data[1], vgg_args_dict, 'rgb_net2').model()
-            rgb_net3 = vgg16.VGG16(rgb_data[2], vgg_args_dict, 'rgb_net3').model()
-            rgb_net4 = vgg16.VGG16(rgb_data[3], vgg_args_dict, 'rgb_net4').model()
-            rgb_net5 = vgg16.VGG16(rgb_data[4], vgg_args_dict, 'rgb_net5').model()
-            rgb_net6 = vgg16.VGG16(rgb_data[5], vgg_args_dict, 'rgb_net6').model()
+            # VGG16
+            # rgb_net1 = vgg16.VGG16(rgb_data[0], vgg_args_dict, 'rgb_net1').model()
+            # rgb_net2 = vgg16.VGG16(rgb_data[1], vgg_args_dict, 'rgb_net2').model()
+            # rgb_net3 = vgg16.VGG16(rgb_data[2], vgg_args_dict, 'rgb_net3').model()
+            # rgb_net4 = vgg16.VGG16(rgb_data[3], vgg_args_dict, 'rgb_net4').model()
+            # rgb_net5 = vgg16.VGG16(rgb_data[4], vgg_args_dict, 'rgb_net5').model()
+            # rgb_net6 = vgg16.VGG16(rgb_data[5], vgg_args_dict, 'rgb_net6').model()
+
+            # VGG8
+            rgb_net1 = vgg8.VGG8(rgb_data[0], vgg_args_dict, 'rgb_net1').model()
+            rgb_net2 = vgg8.VGG8(rgb_data[1], vgg_args_dict, 'rgb_net2').model()
+            rgb_net3 = vgg8.VGG8(rgb_data[2], vgg_args_dict, 'rgb_net3').model()
+            rgb_net4 = vgg8.VGG8(rgb_data[3], vgg_args_dict, 'rgb_net4').model()
+            rgb_net5 = vgg8.VGG8(rgb_data[4], vgg_args_dict, 'rgb_net5').model()
+            rgb_net6 = vgg8.VGG8(rgb_data[5], vgg_args_dict, 'rgb_net6').model()
 
             rgb_module_fc_inputs = tf.concat(values=[rgb_net1, rgb_net2, rgb_net3, rgb_net4, rgb_net5, rgb_net6],
                                              axis=1, name='rgb_fc_concat')

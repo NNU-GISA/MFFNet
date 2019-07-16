@@ -89,7 +89,7 @@ class VGG8:
                                             stride=self.stride[1], scope='pool4')
 
             # 7th affine layer / fully-connected layer
-            x_flattened = tf.reshape(self.pool4, [-1, int((self.image_size/16)*self.num_output_channels[4])])
+            x_flattened = tf.reshape(self.pool4, [-1, int((self.image_size/16)*self.num_output_channels[3])])
             self.fc5 = tf_util.fully_connected(inputs=x_flattened, num_outputs=self.num_output_fc[0], use_xavier=True, scope='fc5',
                                                stddev=1e-3, activation_fn=tf.nn.relu, bn=self.bn, bn_decay=self.bn_decay,
                                                is_training=self.train_flag)

@@ -59,12 +59,15 @@ def round2int(value, boundary=-1):
         return int(value)
 
 
-def normalize_xyz(xyz_data):
-    """Function that is used to normalize the xyz data
+def normalize_xyz_warping(xyz_data):
+    """Function that is used to normalize the xyz data, which is warped
 
     :param xyz_data:
     :return:
     """
+
+    if np.min(xyz_data) < 0:
+        xyz_data -= np.min(xyz_data)
 
     if np.max(xyz_data) != 0:
         xyz_data /= np.max(xyz_data)
@@ -73,12 +76,33 @@ def normalize_xyz(xyz_data):
     return xyz_data
 
 
-def point_freq_projection_plus_normalized(data_source, resolution, block_size=3, alpha=0.1, other_op='011'):
+def normalize_xyz(xyz_data, area_size=1.0):
+    """Function that is used to normalize the xyz data
+
+    :param xyz_data:
+    :param area_size:
+    :return:
+    """
+
+    # Size of the given block of the point cloud should be larger than zero
+    assert(area_size > 0)
+
+    if np.min(xyz_data) < 0:
+        xyz_data -= np.min(xyz_data)
+
+    xyz_data /= area_size
+    xyz_data -= np.min(xyz_data)
+
+    return xyz_data
+
+
+def point_freq_projection_plus_warped_normalized(data_source, resolution, block_size=3, alpha=0.1, other_op='011'):
     """Function that is used to obtain the point frequency projection result
 
     :param data_source: np.ndarray, an object that stores original data
     :param resolution: int, an object that represents the resolution of the RGB image
     :param block_size: int, an object that represents the size of the block
+    :param alpha: float, an object that tells threshold proportion
     :param other_op: string, an object that tells what operation will be carried out for the following processing
     :return:
     """
@@ -87,9 +111,47 @@ def point_freq_projection_plus_normalized(data_source, resolution, block_size=3,
     # Normalization
     data = data_source[:, 0:6]
 
-    data[:, 0], data[:, 1], data[:, 2] = normalize_xyz(xyz_data=data[:, 0]),\
-                                         normalize_xyz(xyz_data=data[:, 1]),\
-                                         normalize_xyz(xyz_data=data[:, 2])
+    data[:, 0], data[:, 1], data[:, 2] = normalize_xyz_warping(xyz_data=data[:, 0]),\
+                                         normalize_xyz_warping(xyz_data=data[:, 1]),\
+                                         normalize_xyz_warping(xyz_data=data[:, 2])
+
+    # Obtain the different projection result
+    point_freq_result_xy = generate_point_freq_2opposite_projection(data=data, resolution=resolution,
+                                                                    plane_name='xy',
+                                                                    block_size=block_size, other_op=other_op,
+                                                                    alpha=alpha)
+    point_freq_result_yz = generate_point_freq_2opposite_projection(data=data, resolution=resolution,
+                                                                    plane_name='yz',
+                                                                    block_size=block_size, other_op=other_op,
+                                                                    alpha=alpha)
+    point_freq_result_xz = generate_point_freq_2opposite_projection(data=data, resolution=resolution,
+                                                                    plane_name='xz',
+                                                                    block_size=block_size, other_op=other_op,
+                                                                    alpha=alpha)
+
+    return point_freq_result_xy.astype(np.uint8), point_freq_result_yz.astype(np.uint8), point_freq_result_xz.astype(np.uint8)
+
+
+def point_freq_projection_plus_normalized(data_source, resolution, block_size=3,
+                                          alpha=0.1, other_op='011', area_size=1.0):
+    """Function that is used to obtain the point frequency projection result
+
+    :param data_source: np.ndarray, an object that stores original data
+    :param resolution: int, an object that represents the resolution of the RGB image
+    :param block_size: int, an object that represents the size of the block
+    :param other_op: string, an object that tells what operation will be carried out for the following processing
+    :param alpha: float, an object that tells threshold proportion
+    :param area_size: float, an object that represents the size of the given area of point cloud
+    :return:
+    """
+
+    # Scale all points to the range (0,1)
+    # Normalization
+    data = data_source[:, 0:6]
+
+    data[:, 0], data[:, 1], data[:, 2] = normalize_xyz(xyz_data=data[:, 0], area_size=area_size),\
+                                         normalize_xyz(xyz_data=data[:, 1], area_size=area_size),\
+                                         normalize_xyz(xyz_data=data[:, 2], area_size=area_size)
 
     # Obtain the different projection result
     point_freq_result_xy = generate_point_freq_2opposite_projection(data=data, resolution=resolution,
@@ -356,11 +418,11 @@ def main():
     data_list = os.listdir(config.data_dir)
     for data_file in data_list:
         data_source = load_data_files(config.data_dir + '/' + data_file)
-        pf_result_xy, pf_result_yz, pf_result_xz = point_freq_projection_plus_normalized(data_source=data_source,
-                                                                                         resolution=config.resolution,
-                                                                                         block_size=config.block_size,
-                                                                                         alpha=config.alpha,
-                                                                                         other_op=config.other_operation)
+        pf_result_xy, pf_result_yz, pf_result_xz = \
+            point_freq_projection_plus_warped_normalized(data_source=data_source, resolution=config.resolution,
+                                                         block_size=config.block_size, alpha=config.alpha,
+                                                         other_op=config.other_operation)
+
         # File name for point frequency to be stored
         result_file_name = str(config.res_dir + '/' + data_file[:-4]) + '_'
         # Generate the point frequency matrix
